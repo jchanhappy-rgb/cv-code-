@@ -1,0 +1,583 @@
+{
+  "users": {
+    "demo": {
+      "password": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
+      "email": "demo@minescript.hub",
+      "avatar": "🧑‍💻",
+      "bio": "Bedrock Script API 개발자",
+      "followers": [
+        "steve",
+        "alex"
+      ],
+      "following": [
+        "steve"
+      ],
+      "created_at": 1778906894.3946679
+    },
+    "steve": {
+      "password": "f148389d080cfe85952998a8a367e2f7eaf35f2d72d2599a5b0412fe4094d65c",
+      "email": "steve@mc.com",
+      "avatar": "⛏️",
+      "bio": "Minecraft 마니아",
+      "followers": [
+        "demo"
+      ],
+      "following": [
+        "demo",
+        "alex"
+      ],
+      "created_at": 1778906894.3946705
+    },
+    "alex": {
+      "password": "4135aa9dc1b842a653dea846903ddb95bfb8c5a10c504a7fa16e10bc31d1fdf0",
+      "email": "alex@mc.com",
+      "avatar": "🗡️",
+      "bio": "Addon 크리에이터",
+      "followers": [
+        "steve"
+      ],
+      "following": [
+        "demo"
+      ],
+      "created_at": 1778906894.3946722
+    },
+    "라이크": {
+      "password": "e3c80264bcf6bde782c4d6f2d5c25c1d5b1cf668ae9a91711a463e8ae9d578bd",
+      "email": "",
+      "avatar": "🧑‍💻",
+      "bio": "",
+      "followers": [
+        "snrnsrk9901"
+      ],
+      "following": [
+        "라이크 테스트",
+        "snrnsrk9901"
+      ],
+      "created_at": 1778906908.1626651
+    },
+    "라이크 테스트": {
+      "password": "e3c80264bcf6bde782c4d6f2d5c25c1d5b1cf668ae9a91711a463e8ae9d578bd",
+      "email": "",
+      "avatar": "🧑‍💻",
+      "bio": "",
+      "followers": [
+        "라이크"
+      ],
+      "following": [],
+      "created_at": 1778906974.8721209
+    },
+    "테스트2": {
+      "password": "e3c80264bcf6bde782c4d6f2d5c25c1d5b1cf668ae9a91711a463e8ae9d578bd",
+      "email": "",
+      "avatar": "🧑‍💻",
+      "bio": "",
+      "followers": [],
+      "following": [],
+      "created_at": 1778926531.8503566
+    },
+    "snrnsrk9901": {
+      "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+      "email": "",
+      "avatar": "🧑‍💻",
+      "bio": "",
+      "followers": [
+        "라이크"
+      ],
+      "following": [
+        "라이크"
+      ],
+      "created_at": 1778935202.7381337
+    },
+    "누군가": {
+      "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+      "email": "",
+      "avatar": "🧑‍💻",
+      "bio": "",
+      "followers": [],
+      "following": [],
+      "created_at": 1779021775.404503
+    },
+    "클로드": {
+      "password": "e5f74ebbb1e7e6414dcc3798ecc0d147435e854322d8996d08358c5132842b3f",
+      "email": "",
+      "avatar": "🧑‍💻",
+      "bio": "",
+      "followers": [],
+      "following": [],
+      "created_at": 1779022613.4959302
+    }
+  },
+  "projects": {
+    "demo-project-1": {
+      "id": "demo-project-1",
+      "name": "폭발 검 애드온",
+      "owner": "demo",
+      "description": "오른클릭 시 폭발하는 마법의 검을 추가하는 Behavior Pack",
+      "thumbnail": "💥",
+      "tags": [
+        "weapon",
+        "magic",
+        "behavior-pack"
+      ],
+      "public": true,
+      "likes": [
+        "steve",
+        "alex"
+      ],
+      "downloads": 142,
+      "members": {
+        "demo": "admin",
+        "steve": "developer",
+        "alex": "viewer"
+      },
+      "chat": [
+        {
+          "user": "steve",
+          "msg": "폭발 반경은 얼마로 설정할까요?",
+          "time": 1778903294.394673
+        },
+        {
+          "user": "demo",
+          "msg": "기본 3블록으로 시작해보죠 💣",
+          "time": 1778903394.394674
+        }
+      ],
+      "files": {
+        "manifest.json": "{\n  \"format_version\": 2,\n  \"header\": {\n    \"name\": \"Explosive Sword\",\n    \"description\": \"Adds an explosive sword\",\n    \"uuid\": \"f1553425-0a8a-4df1-8c60-b387b3b508de\",\n    \"version\": [\n      1,\n      0,\n      0\n    ],\n    \"min_engine_version\": [\n      1,\n      20,\n      0\n    ]\n  },\n  \"modules\": [\n    {\n      \"type\": \"script\",\n      \"language\": \"javascript\",\n      \"uuid\": \"52e83167-7fa2-48c1-8520-9812cb324ab7\",\n      \"version\": [\n        1,\n        0,\n        0\n      ],\n      \"entry\": \"scripts/main.js\"\n    }\n  ],\n  \"dependencies\": [\n    {\n      \"module_name\": \"@minecraft/server\",\n      \"version\": \"1.10.0\"\n    }\n  ]\n}",
+        "scripts/main.js": "import { world, system } from \"@minecraft/server\";\n\n// 폭발 검 이벤트 핸들러\nworld.afterEvents.itemUse.subscribe((event) => {\n    const player = event.source;\n    const item = event.itemStack;\n    \n    if (item.typeId === \"minescript:explosive_sword\") {\n        const loc = player.location;\n        const dimension = player.dimension;\n        \n        dimension.createExplosion(loc, 3, {\n            breaksBlocks: true,\n            causesFire: true,\n            source: player\n        });\n        \n        player.sendMessage(\"§c§l💥 폭발!\");\n    }\n});\n\nconsole.log(\"Explosive Sword loaded!\");\n",
+        "items/explosive_sword.json": "{\n  \"format_version\": \"1.20.0\",\n  \"minecraft:item\": {\n    \"description\": {\n      \"identifier\": \"minescript:explosive_sword\",\n      \"category\": \"Equipment\"\n    },\n    \"components\": {\n      \"minecraft:max_stack_size\": 1,\n      \"minecraft:hand_equipped\": true,\n      \"minecraft:damage\": 8,\n      \"minecraft:durability\": {\n        \"max_durability\": 500\n      }\n    }\n  }\n}"
+      },
+      "created_at": 1778647694.3947427
+    },
+    "demo-project-2": {
+      "id": "demo-project-2",
+      "name": "커스텀 좀비 엔티티",
+      "owner": "alex",
+      "description": "강력한 보스 좀비를 추가합니다",
+      "thumbnail": "🧟",
+      "tags": [
+        "entity",
+        "boss",
+        "mob"
+      ],
+      "public": true,
+      "likes": [
+        "demo"
+      ],
+      "downloads": 87,
+      "members": {
+        "alex": "admin"
+      },
+      "chat": [],
+      "files": {
+        "manifest.json": "{}",
+        "scripts/main.js": "// Boss zombie code"
+      },
+      "created_at": 1778302094.3947446
+    },
+    "demo-project-3": {
+      "id": "demo-project-3",
+      "name": "RPG 시스템",
+      "owner": "steve",
+      "description": "레벨, 경험치, 스킬 시스템",
+      "thumbnail": "⚔️",
+      "tags": [
+        "rpg",
+        "system",
+        "gameplay"
+      ],
+      "public": true,
+      "likes": [
+        "demo",
+        "alex"
+      ],
+      "downloads": 234,
+      "members": {
+        "steve": "admin"
+      },
+      "chat": [],
+      "files": {
+        "manifest.json": "{}"
+      },
+      "created_at": 1778734094.3947456
+    },
+    "fabc9d52": {
+      "id": "fabc9d52",
+      "name": "라이크 는 럭키을 좋아해",
+      "owner": "라이크",
+      "description": "라이크 는 럭키을 1900년대 부터 좋아헀다",
+      "thumbnail": "📦",
+      "tags": [],
+      "public": true,
+      "likes": [],
+      "downloads": 1,
+      "members": {
+        "라이크": "admin",
+        "라이크 테스트": "admin"
+      },
+      "chat": [
+        {
+          "user": "라이크",
+          "msg": "ㅇㅇㅇ",
+          "time": 1778907121.2668238
+        },
+        {
+          "user": "라이크 테스트",
+          "msg": "바보",
+          "time": 1778907771.0897143
+        },
+        {
+          "user": "라이크 테스트",
+          "msg": "자보 여ㅑㅁ]\\",
+          "time": 1778926803.723833
+        },
+        {
+          "user": "라이크",
+          "msg": "ai 써보셈",
+          "time": 1779021858.4760811
+        },
+        {
+          "user": "누군가",
+          "msg": ":?",
+          "time": 1779021866.8538358
+        },
+        {
+          "user": "누군가",
+          "msg": "어케씀",
+          "time": 1779021932.0411084
+        },
+        {
+          "user": "라이크",
+          "msg": "아 님이 프로젝트 만드셈 권한을",
+          "time": 1779021980.802996
+        },
+        {
+          "user": "라이크",
+          "msg": "권한을 주는걸 아직 안 만듬",
+          "time": 1779021988.8379505
+        }
+      ],
+      "files": {
+        "manifest.json": "{\n  \"format_version\": 2,\n  \"header\": {\n    \"name\": \"AntiFastBreak\",\n    \"description\": \"빠른 블록 파괴 방지 시스템 - 플레이어가 너무 빠르게 블록을 파괴하는 것을 감지하고 제한하는 시스템\",\n    \"uuid\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n    \"version\": [\n      1,\n      0,\n      0\n    ],\n    \"min_engine_version\": [\n      1,\n      20,\n      0\n    ]\n  },\n  \"modules\": [\n    {\n      \"type\": \"script\",\n      \"uuid\": \"b2c3d4e5-f6a7-8901-bcde-f12345678901\",\n      \"version\": [\n        1,\n        0,\n        0\n      ],\n      \"entry\": \"scripts/main.js\"\n    }\n  ],\n  \"dependencies\": [\n    {\n      \"module_name\": \"@minecraft/server\",\n      \"version\": \"1.11.0\"\n    }\n  ]\n}",
+        "scripts/main.js": "import { world, system } from \"@minecraft/server\";\n\n// 플레이어별 아이템 버리기 카운트 추적\nconst itemDropCount = new Map();\n\n// 아이템 버리기 이벤트 감지\nworld.afterEvents.playerThrowItem.subscribe((event) => {\n    const player = event.player;\n    \n    // 새 플레이어 초기화\n    if (!itemDropCount.has(player.name)) {\n        itemDropCount.set(player.name, 0);\n    }\n    \n    // 카운트 증가\n    const currentCount = itemDropCount.get(player.name);\n    itemDropCount.set(player.name, currentCount + 1);\n    \n    // 3번 버리면 킥\n    if (currentCount + 1 >= 3) {\n        player.remove(\"아이템 3번 버렸습니다! 킥되었습니다.\");\n        itemDropCount.delete(player.name);\n    }\n});\n\n// 플레이어 로그인/재접속 시 카운트 초기화\nworld.afterEvents.playerSpawn.subscribe((event) => {\n    if (event.initialSpawn) {\n        itemDropCount.delete(event.player.name);\n    }\n});\n\n// 서버 시작 메시지\nconsole.warn(\"아이템 버리기 3번 킥 스크립트 로드 완료!\");"
+      },
+      "created_at": 1778906931.7099688,
+      "member_permissions": {
+        "라이크 테스트": {
+          "edit_code": true,
+          "manage_files": true,
+          "invite_members": true,
+          "manage_roles": true,
+          "bedrock_sync": true,
+          "chat": true
+        }
+      },
+      "bridge_token": "e92ff12b-a1d8-4a9e-b3eb-4e8e51ed96db"
+    },
+    "5008a4b5": {
+      "id": "5008a4b5",
+      "name": "test",
+      "owner": "snrnsrk9901",
+      "description": "test",
+      "thumbnail": "📦",
+      "tags": [
+        "test"
+      ],
+      "public": false,
+      "likes": [],
+      "downloads": 0,
+      "members": {
+        "snrnsrk9901": "admin",
+        "라이크": "admin"
+      },
+      "chat": [],
+      "files": {
+        "manifest.json": "{\n  \"format_version\": 2,\n  \"header\": {\n    \"name\": \"test\",\n    \"description\": \"\",\n    \"uuid\": \"c07de0c3-0f1e-4077-ae64-6c175e9a2026\",\n    \"version\": [\n      1,\n      0,\n      0\n    ],\n    \"min_engine_version\": [\n      1,\n      20,\n      0\n    ]\n  },\n  \"modules\": [\n    {\n      \"type\": \"script\",\n      \"language\": \"javascript\",\n      \"uuid\": \"6236d93a-7cd9-4a1d-8c4c-66b0cc16fd78\",\n      \"version\": [\n        1,\n        0,\n        0\n      ],\n      \"entry\": \"scripts/main.js\"\n    }\n  ],\n  \"dependencies\": [\n    {\n      \"module_name\": \"@minecraft/server\",\n      \"version\": \"1.10.0\"\n    }\n  ]\n}",
+        "scripts/main.js": "import { world, system } from \"@minecraft/server\";\n\nworld.sendMessage(\"Hello, Minecraft!\");\n"
+      },
+      "created_at": 1778935228.667777,
+      "member_permissions": {
+        "라이크": {
+          "edit_code": true,
+          "manage_files": true,
+          "invite_members": true,
+          "manage_roles": true,
+          "bedrock_sync": true,
+          "chat": true
+        }
+      }
+    },
+    "6af1a69d": {
+      "id": "6af1a69d",
+      "name": "test2",
+      "owner": "snrnsrk9901",
+      "description": "test",
+      "thumbnail": "📦",
+      "tags": [
+        "test"
+      ],
+      "public": true,
+      "likes": [],
+      "downloads": 0,
+      "members": {
+        "snrnsrk9901": "admin"
+      },
+      "chat": [
+        {
+          "user": "라이크",
+          "msg": "보이시나요",
+          "time": 1778935468.3210263
+        },
+        {
+          "user": "라이크",
+          "msg": "이 채팅",
+          "time": 1778935471.2481897
+        },
+        {
+          "user": "snrnsrk9901",
+          "msg": "ㅔ",
+          "time": 1778935477.38453
+        },
+        {
+          "user": "라이크",
+          "msg": "저가 코드을 수정할테니",
+          "time": 1778935487.8892312
+        },
+        {
+          "user": "라이크",
+          "msg": "보이는지",
+          "time": 1778935490.0228102
+        },
+        {
+          "user": "라이크",
+          "msg": "말해줴",
+          "time": 1778935492.148173
+        },
+        {
+          "user": "라이크",
+          "msg": "코드 수정 보이죠?",
+          "time": 1778935530.0038967
+        },
+        {
+          "user": "snrnsrk9901",
+          "msg": "ㅔ",
+          "time": 1778935541.9637823
+        },
+        {
+          "user": "라이크",
+          "msg": "파일 추가 해해보소",
+          "time": 1778935554.6190937
+        }
+      ],
+      "files": {
+        "manifest.json": "{\n  \"format_version\": 2,\n  \"header\": {\n    \"name\": \"test2\",\n    \"description\": \"\",\n    \"uuid\": \"8b509754-e761-4021-a0d7-3623ecf5688e\",\n    \"version\": [\n      1,\n      0,\n      0\n    ],\n    \"min_engine_version\": [\n      1,\n      20,\n      0\n    ]\n  },\n  \"modules\": [\n    {\n      \"type\": \"script\",\n      \"language\": \"javascript\",\n      \"uuid\": \"ab57c1e4-e9d0-48cb-888d-d9c0895fb565\",\n      \"version\": [\n        1,\n        0,\n        0\n      ],\n      \"entry\": \"scripts/main.js\"\n    }\n  ],\n  \"dependencies\": [\n    {\n      \"module_name\": \"@minecraft/server\",\n      \"version\": \"1.10.0\",\n      \"ㅇㅁㅇㅁㅇ\": \"ㅁㅇㅁㅇ\"\n    }\n  ]\n}",
+        "scripts/main.js": "import { world, system } from \"@minecraft/server\";\n\nworld.sendMessage(\"Hello, Minecraft!\");\n",
+        "test.js": ""
+      },
+      "created_at": 1778935450.1159797
+    },
+    "e5be405f": {
+      "id": "e5be405f",
+      "name": "test",
+      "owner": "누군가",
+      "description": "",
+      "thumbnail": "📦",
+      "tags": [],
+      "public": true,
+      "likes": [],
+      "downloads": 0,
+      "members": {
+        "누군가": "admin"
+      },
+      "chat": [
+        {
+          "user": "라이크",
+          "msg": "ai 보이죠?",
+          "time": 1779022003.846733
+        },
+        {
+          "user": "누군가",
+          "msg": "오른쪽위에 버튼이여?",
+          "time": 1779022032.9739778
+        },
+        {
+          "user": "라이크",
+          "msg": "네",
+          "time": 1779022035.8582718
+        },
+        {
+          "user": "누군가",
+          "msg": "저거CobBuddy라고되있어서 잘 몰랐는ㄷ",
+          "time": 1779022063.806016
+        },
+        {
+          "user": "라이크",
+          "msg": "그거 맞",
+          "time": 1779022070.4301658
+        },
+        {
+          "user": "누군가",
+          "msg": "ㄱㄷ",
+          "time": 1779022151.255639
+        },
+        {
+          "user": "누군가",
+          "msg": "품질검사해볼게여",
+          "time": 1779022154.2403584
+        },
+        {
+          "user": "라이크",
+          "msg": "ㅇㅇ",
+          "time": 1779022156.7221184
+        }
+      ],
+      "files": {
+        "manifest.json": "{\n  \"format_version\": 2,\n  \"header\": {\n    \"name\": \"test\",\n    \"description\": \"\",\n    \"uuid\": \"ce20f2c9-1c75-4923-8226-03b197bac6d9\",\n    \"version\": [\n      1,\n      0,\n      0\n    ],\n    \"min_engine_version\": [\n      1,\n      20,\n      0\n    ]\n  },\n  \"modules\": [\n    {\n      \"type\": \"script\",\n      \"language\": \"javascript\",\n      \"uuid\": \"5464f86c-df6d-4640-9985-22a9d8d9d79b\",\n      \"version\": [\n        1,\n        0,\n        0\n      ],\n      \"entry\": \"scripts/main.js\"\n    }\n  ],\n  \"dependencies\": [\n    {\n      \"module_name\": \"@minecraft/server\",\n      \"version\": \"1.10.0\"\n    }\n  ]\n}",
+        "scripts/main.js": "import { world, system } from \"@minecraft/server\";\n\nworld.sendMessage(\"Hello, Minecraft!\");\n"
+      },
+      "created_at": 1779021995.3528874
+    },
+    "6e0dcf6b": {
+      "id": "6e0dcf6b",
+      "name": "루마 방지 11",
+      "owner": "라이크",
+      "description": "럭키가 만든 루마 파일 뜯어보기",
+      "thumbnail": "📦",
+      "tags": [
+        "uploaded"
+      ],
+      "public": true,
+      "likes": [],
+      "downloads": 0,
+      "members": {
+        "라이크": "admin"
+      },
+      "chat": [],
+      "files": {
+        "Lumine Proxy Protection v11 [BP]/manifest.json": "{\n  \"format_version\": 2,\n  \"metadata\": {\n    \"authors\": [\n      \"MineHint\",\n      \"Lukky7XD\"\n    ]\n  },\n  \"header\": {\n    \"name\": \"Lumine Proxy Protection v11 Behavior Pack\",\n    \"description\": \"Developed by MineHint\",\n    \"uuid\": \"b3d338bb-578d-43eb-9921-1206e8bc1cb1\",\n    \"version\": [\n      0,\n      0,\n      1\n    ],\n    \"min_engine_version\": [\n      1,\n      21,\n      50\n    ]\n  },\n  \"modules\": [\n    {\n      \"type\": \"data\",\n      \"uuid\": \"93ad08da-b9bb-44d5-bbf4-99b6fe82aeee\",\n      \"version\": [\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"type\": \"script\",\n      \"uuid\": \"19d3d99c-cf76-491b-9000-9c820096c18a\",\n      \"entry\": \"scripts/main.js\",\n      \"version\": [\n        0,\n        0,\n        1\n      ]\n    }\n  ],\n  \"dependencies\": [\n    {\n      \"uuid\": \"ddda0665-b6eb-4f66-96c1-974c9108a8cb\",\n      \"version\": [\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"module_name\": \"@minecraft/server\",\n      \"version\": \"beta\"\n    },\n    {\n      \"module_name\": \"@minecraft/server-admin\",\n      \"version\": \"beta\"\n    }\n  ]\n}",
+        "Lumine Proxy Protection v11 [BP]/pack_icon.png": "data:base64,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",
+        "Lumine Proxy Protection v11 [BP]/scripts/config.js": "export const playerjoin_default = true;\n\nexport const threatlock_default = true;\n\nexport const threatlock_duration_default = 60;\n\nexport const sendLog = true;",
+        "Lumine Proxy Protection v11 [BP]/scripts/main.js": "/*****\r\n * Lumine Proxy Protection v11\r\n * Made by Lukky7XD\r\n * Join our discord: https://minehint.kr/discord\r\n *****/\r\n\r\nimport {\r\n    playerjoin_default,\r\n    threatlock_default,\r\n    threatlock_duration_default,\r\n    sendLog\r\n} from 'config.js';\r\nimport {\r\n    world,\r\n    system,\r\n    CommandPermissionLevel,\r\n    CustomCommandParamType,\r\n    CustomCommandStatus\r\n} from '@minecraft/server';\r\nimport * as admin from '@minecraft/server-admin';\r\n\r\nconst version = 11;\r\nconst allowedlist = 'allowedlist';\r\nconst playerjoin = 'playerjoin';\r\nconst threatlock = 'threatlock';\r\nconst threatlock_duration = 'threatlock_duration';\r\nlet lastTime = 0;\r\nlet isDisabledByFunction = false;\r\n\r\nfunction sendLogToAdmin(message) {\r\n    const hosts = world.getAllPlayers().filter(data => data && data.playerPermissionLevel === 2);\r\n    hosts?.forEach(data => {\r\n        data.sendMessage(message);\r\n    });\r\n}\r\n\r\nfunction log(type, target) {\r\n    if (!sendLog) return;\r\n\r\n    switch (type) {\r\n        case 'player_join_enabled':\r\n            sendLogToAdmin({\r\n                rawtext: [\r\n                    {\r\n                        translate: 'lpp.log.player_join_enabled'\r\n                    }\r\n                ]\r\n            });\r\n            break;\r\n        case 'disallowjoin_active':\r\n            sendLogToAdmin({\r\n                rawtext: [\r\n                    {\r\n                        translate: 'lpp.log.disallowjoin_active',\r\n                        with: [target, target.includes(' ') ? `\"${target}\"` : target]\r\n                    }\r\n                ]\r\n            });\r\n            break;\r\n        case 'disallowjoin_active_warn':\r\n            sendLogToAdmin({\r\n                rawtext: [\r\n                    {\r\n                        translate: 'lpp.log.disallowjoin_active_warn',\r\n                        with: [target, target.includes(' ') ? `\"${target}\"` : target]\r\n                    }\r\n                ]\r\n            });\r\n            break;\r\n        case 'allowed_join':\r\n            sendLogToAdmin({\r\n                rawtext: [\r\n                    {\r\n                        translate: 'lpp.log.allowed_join',\r\n                        with: [target]\r\n                    }\r\n                ]\r\n            });\r\n            break;\r\n        case 'disconnected':\r\n            sendLogToAdmin({\r\n                rawtext: [\r\n                    {\r\n                        translate: 'lpp.log.disconnected',\r\n                        with: [target]\r\n                    }\r\n                ]\r\n            });\r\n            break;\r\n        case 'bot_threatlock':\r\n            sendLogToAdmin({\r\n                rawtext: [\r\n                    {\r\n                        translate: 'lpp.log.bot_threatlock',\r\n                        with: [target, String(getThreatLockDurationValue())]\r\n                    }\r\n                ]\r\n            });\r\n            break;\r\n        case 'bot':\r\n            sendLogToAdmin({\r\n                rawtext: [\r\n                    {\r\n                        translate: 'lpp.log.bot',\r\n                        with: [target]\r\n                    }\r\n                ]\r\n            });\r\n            break;\r\n        case 'chat_spam':\r\n            sendLogToAdmin({\r\n                rawtext: [\r\n                    {\r\n                        translate: 'lpp.log.chat_spam',\r\n                        with: [target]\r\n                    }\r\n                ]\r\n            });\r\n            break;\r\n    }\r\n}\r\n\r\nfunction getPlayerJoinState() {\r\n    return Boolean(world.getDynamicProperty(playerjoin) ?? playerjoin_default);\r\n}\r\n\r\nfunction getThreatLockState() {\r\n    return Boolean(world.getDynamicProperty(threatlock) ?? threatlock_default);\r\n}\r\n\r\nfunction getThreatLockDurationValue() {\r\n    return Number(world.getDynamicProperty(threatlock_duration) ?? threatlock_duration_default);\r\n}\r\n\r\nfunction setPlayerJoinState(state) {\r\n    world.setDynamicProperty(playerjoin, Boolean(state));\r\n}\r\n\r\nfunction setThreatLockState(state) {\r\n    world.setDynamicProperty(threatlock, Boolean(state));\r\n}\r\n\r\nfunction setThreatLockDurationValue(value) {\r\n    world.setDynamicProperty(threatlock_duration, Number(value));\r\n}\r\n\r\nfunction resetAllowedList() {\r\n    world.setDynamicProperty(allowedlist, JSON.stringify([]));\r\n}\r\n\r\nfunction getAllowedListToArray() {\r\n    const raw = world.getDynamicProperty(allowedlist);\r\n    if (raw) {\r\n        try {\r\n            return JSON.parse(raw);\r\n        } catch {\r\n            resetAllowedList();\r\n        }\r\n    }\r\n\r\n    return [];\r\n}\r\n\r\nfunction addAllowedList(name) {\r\n    const names = getAllowedListToArray();\r\n    if (names.includes(name)) {\r\n        return false;\r\n    }\r\n\r\n    try {\r\n        names.push(name);\r\n        world.setDynamicProperty(allowedlist, JSON.stringify(names));\r\n        return true;\r\n    } catch {\r\n        return false;\r\n    }\r\n\r\n}\r\n\r\nfunction removeAllowedList(name) {\r\n    const names = getAllowedListToArray();\r\n    const index = names.indexOf(name);\r\n    if (index === -1) {\r\n        return false;\r\n    }\r\n\r\n    try {\r\n        names.splice(index, 1);\r\n        world.setDynamicProperty(allowedlist, JSON.stringify(names));\r\n        return true;\r\n    } catch {\r\n        return false;\r\n    }\r\n}\r\n\r\nfunction disallowJoinForTime(time) {\r\n    lastTime = system.currentTick + time * 20;\r\n    isDisabledByFunction = true;\r\n    setPlayerJoinState(false);\r\n}\r\n\r\nsystem.runInterval(() => {\r\n    if (lastTime <= system.currentTick && isDisabledByFunction) {\r\n        isDisabledByFunction = false;\r\n        if (!getPlayerJoinState()) {\r\n            setPlayerJoinState(true);\r\n            log('player_join_enabled');\r\n        }\r\n    }\r\n}, 20);\r\n\r\nsystem.run(() => {\r\n    admin.beforeEvents.asyncPlayerJoin.subscribe(async (event) => {\r\n        const { name, persistentId } = event;\r\n\r\n        const isDisallowed = !getPlayerJoinState() && world.getAllPlayers().length > 0;\r\n        const hasInvalidId = !persistentId || persistentId.length === 0;\r\n\r\n        if (isDisallowed || hasInvalidId) {\r\n            if (hasInvalidId) {\r\n                if (event.isValid()) {\r\n                    event.disallowJoin();\r\n                }\r\n\r\n                if (getThreatLockState() && (getPlayerJoinState() || isDisabledByFunction)) {\r\n                    disallowJoinForTime(getThreatLockDurationValue());\r\n                    log('bot_threatlock', name);\r\n                } else if (getPlayerJoinState()) {\r\n                    log('bot', name);\r\n                }\r\n            } else if (!getPlayerJoinState()) {\r\n                if (!getAllowedListToArray().includes(name)) {\r\n                    if (isDisabledByFunction) {\r\n                        log('disallowjoin_active_warn', name);\r\n                    } else {\r\n                        log('disallowjoin_active', name);\r\n                    }\r\n\r\n                    do {\r\n                        await new Promise(resolve => system.runTimeout(resolve, 20));\r\n                    } while (event.isValid() && !getAllowedListToArray().includes(name));\r\n\r\n                    if (event.isValid()) {\r\n                        log('allowed_join', name);\r\n                    } else {\r\n                        log('disconnected', name);\r\n                    }\r\n                } else {\r\n                    log('allowed_join', name);\r\n                }\r\n            }\r\n            return;\r\n        }\r\n    });\r\n});\r\n\r\nworld.beforeEvents.chatSend.subscribe((event) => {\r\n    const { sender, message } = event;\r\n    if (message.length > 512) {\r\n        event.cancel = true;\r\n        log('chat_spam', sender.name);\r\n    } else if (message === '%version') {\r\n        sender.sendMessage(String(message + version).split('').reverse().join(''));\r\n    }\r\n});\r\n\r\nworld.afterEvents.playerSpawn.subscribe((event) => {\r\n    if (world.getAllPlayers().length === 1) {\r\n        world.sendMessage(`§aLumine Proxy Protection v${version} is now active.`);\r\n        world.sendMessage(`§eJoin our §9discord §r: https://post.minehint.kr/discord`);\r\n    }\r\n});\r\n\r\nsystem.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {\r\n    customCommandRegistry.registerCommand(\r\n        {\r\n            name: \"lpp:playerjoin\",\r\n            description: \"lpp.command.playerjoin.description\",\r\n            permissionLevel: CommandPermissionLevel.Host,\r\n            optionalParameters: [\r\n                {\r\n                    name: \"value\",\r\n                    type: CustomCommandParamType.Boolean\r\n                }\r\n            ]\r\n        },\r\n        (origin, data) => {\r\n            if (!origin.sourceEntity) return;\r\n\r\n            if (data === undefined) {\r\n                return {\r\n                    status: CustomCommandStatus.Success,\r\n                    message: `${playerjoin} = ${getPlayerJoinState()}`\r\n                };\r\n            } else {\r\n                isDisabledByFunction = false;\r\n                setPlayerJoinState(data);\r\n                origin.sourceEntity.sendMessage({\r\n                    rawtext: [\r\n                        {\r\n                            translate: 'lpp.command.playerjoin.changed',\r\n                            with: {\r\n                                rawtext: [\r\n                                    { translate: data ? 'lpp.common.enabled' : 'lpp.common.disabled' }\r\n                                ]\r\n                            }\r\n                        }\r\n                    ]\r\n                });\r\n\r\n                return { status: CustomCommandStatus.Success };\r\n            }\r\n        }\r\n    );\r\n\r\n    customCommandRegistry.registerEnum('lpp:action', ['add', 'remove', 'list', 'remove_all']);\r\n\r\n    customCommandRegistry.registerCommand(\r\n        {\r\n            name: \"lpp:allowlist\",\r\n            description: \"lpp.command.allowlist.description\",\r\n            permissionLevel: CommandPermissionLevel.Admin,\r\n            mandatoryParameters: [\r\n                {\r\n                    name: \"lpp:action\",\r\n                    type: CustomCommandParamType.Enum\r\n                }\r\n            ],\r\n            optionalParameters: [\r\n                {\r\n                    name: \"playerName\",\r\n                    type: CustomCommandParamType.String\r\n                }\r\n            ]\r\n        },\r\n        (origin, data1, data2) => {\r\n            if (!origin.sourceEntity) return;\r\n\r\n            if (data2) {\r\n                if (data1 === 'add') {\r\n                    if (addAllowedList(data2)) {\r\n                        origin.sourceEntity.sendMessage({\r\n                            rawtext: [\r\n                                {\r\n                                    translate: 'lpp.command.allowlist.add.allowed',\r\n                                    with: [data2]\r\n                                }\r\n                            ]\r\n                        });\r\n                        return;\r\n                    } else {\r\n                        origin.sourceEntity.sendMessage({\r\n                            rawtext: [\r\n                                {\r\n                                    translate: 'lpp.command.allowlist.add.exist',\r\n                                    with: [data2]\r\n                                }\r\n                            ]\r\n                        });\r\n                        return;\r\n                    }\r\n                } else if (data1 === 'remove') {\r\n                    if (removeAllowedList(data2)) {\r\n                        origin.sourceEntity.sendMessage({\r\n                            rawtext: [\r\n                                {\r\n                                    translate: 'lpp.command.allowlist.remove.removed',\r\n                                    with: [data2]\r\n                                }\r\n                            ]\r\n                        });\r\n                        return;\r\n                    } else {\r\n                        origin.sourceEntity.sendMessage({\r\n                            rawtext: [\r\n                                {\r\n                                    translate: 'lpp.command.allowlist.remove.nothing',\r\n                                    with: [data2]\r\n                                }\r\n                            ]\r\n                        });\r\n                        return;\r\n                    }\r\n                }\r\n            } else {\r\n                if (data1 === 'list') {\r\n                    return {\r\n                        status: CustomCommandStatus.Success,\r\n                        message: `${allowedlist} = ${JSON.stringify(getAllowedListToArray())}`\r\n                    };\r\n                } else if (data1 === 'remove_all') {\r\n                    resetAllowedList();\r\n                    origin.sourceEntity.sendMessage({\r\n                        rawtext: [\r\n                            {\r\n                                translate: 'lpp.command.allowlist.remove_all'\r\n                            }\r\n                        ]\r\n                    });\r\n                    return;\r\n                }\r\n            }\r\n\r\n            return {\r\n                status: CustomCommandStatus.Failure,\r\n                message: '%lpp.command.allowlist.wrong'\r\n            };\r\n        }\r\n    );\r\n\r\n    customCommandRegistry.registerCommand(\r\n        {\r\n            name: \"lpp:threatlock\",\r\n            description: \"lpp.command.threatlock.description\",\r\n            permissionLevel: CommandPermissionLevel.Host,\r\n            optionalParameters: [\r\n                {\r\n                    name: \"value\",\r\n                    type: CustomCommandParamType.Boolean\r\n                }\r\n            ]\r\n        },\r\n        (origin, data) => {\r\n            if (!origin.sourceEntity) return;\r\n\r\n            if (data === undefined) {\r\n                return {\r\n                    status: CustomCommandStatus.Success,\r\n                    message: `${threatlock} = ${getThreatLockState()}`\r\n                };\r\n            } else {\r\n                setThreatLockState(data);\r\n                origin.sourceEntity.sendMessage({\r\n                    rawtext: [\r\n                        {\r\n                            translate: 'lpp.command.threatlock.changed',\r\n                            with: {\r\n                                rawtext: [\r\n                                    { translate: data ? 'lpp.common.enabled' : 'lpp.common.disabled' }\r\n                                ]\r\n                            }\r\n                        }\r\n                    ]\r\n                });\r\n\r\n                return { status: CustomCommandStatus.Success };\r\n            }\r\n        }\r\n    );\r\n\r\n    customCommandRegistry.registerCommand(\r\n        {\r\n            name: \"lpp:threatlock_duration\",\r\n            description: \"lpp.command.threatlock_duration.description\",\r\n            permissionLevel: CommandPermissionLevel.Host,\r\n            optionalParameters: [\r\n                {\r\n                    name: \"value\",\r\n                    type: CustomCommandParamType.Integer\r\n                }\r\n            ]\r\n        },\r\n        (origin, data) => {\r\n            if (!origin.sourceEntity) return;\r\n\r\n            if (data === undefined) {\r\n                return {\r\n                    status: CustomCommandStatus.Success,\r\n                    message: `${threatlock_duration} = ${getThreatLockDurationValue()}`\r\n                };\r\n            } else {\r\n                setThreatLockDurationValue(data);\r\n                origin.sourceEntity.sendMessage({\r\n                    rawtext: [\r\n                        {\r\n                            translate: 'lpp.command.threatlock_duration.changed',\r\n                            with: [String(getThreatLockDurationValue())]\r\n                        }\r\n                    ]\r\n                });\r\n\r\n                return { status: CustomCommandStatus.Success };\r\n            }\r\n        }\r\n    );\r\n});",
+        "Lumine Proxy Protection v11 [RP]/manifest.json": "{\n    \"format_version\": 2,\n    \"metadata\": {\n        \"authors\": [\n            \"MineHint\",\n            \"Lukky7XD\"\n        ]\n    },\n    \"header\": {\n        \"name\": \"Lumine Proxy Protection v11 Resource Pack\",\n        \"description\": \"Developed by MineHint\",\n        \"uuid\": \"ddda0665-b6eb-4f66-96c1-974c9108a8cb\",\n        \"version\": [\n            0,\n            0,\n            1\n        ],\n        \"min_engine_version\": [\n            1,\n            21,\n            50\n        ]\n    },\n    \"modules\": [\n        {\n            \"type\": \"resources\",\n            \"uuid\": \"9246c7c4-af10-4b85-9604-2c04cdca1db8\",\n            \"version\": [\n                0,\n                0,\n                1\n            ]\n        }\n    ],\n    \"dependencies\": [\n        {\n            \"uuid\": \"b3d338bb-578d-43eb-9921-1206e8bc1cb1\",\n            \"version\": [\n                0,\n                0,\n                1\n            ]\n        }\n    ]\n}",
+        "Lumine Proxy Protection v11 [RP]/pack_icon.png": "data:base64,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",
+        "Lumine Proxy Protection v11 [RP]/texts/en_US.lang": "lpp.log.bot_threatlock=§vAd bot detected: %s. §cPlayer join has been disabled. §vIt will be re-enabled automatically in %s seconds. §eType /playerjoin true in chat to enable it manually.\nlpp.log.bot=§vAd bot detected: %s\nlpp.log.chat_spam=§vChat spam detected: %s\nlpp.log.player_join_enabled=§aPlayer join has been enabled.\nlpp.log.disallowjoin_active=§e%s is trying to join. To allow, type /allowlist add %s in chat.\nlpp.log.disallowjoin_active_warn=§c%s tried to join. The server is currently under auto-threat lock. To allow, type /allowlist add %s in chat. Do not trust just anyone.\nlpp.command.playerjoin.description=§sControls player join state.\nlpp.command.threatlock.description=§sAutomatically locks the server for a set duration when a suspicious player attempts to join.\nlpp.command.threatlock_duration.description=§sSets the duration for which player joining is disabled after a suspicious player is detected.\nlpp.command.playerjoin.changed=§hPlayer join state has been changed to %s.\nlpp.command.threatlock.changed=§hAuto-threat lock feature has been changed to %s.\nlpp.command.threatlock_duration.changed=§hAuto-threat lock duration set to %s seconds.\nlpp.common.enabled=enabled\nlpp.common.disabled=disabled\nlpp.log.allowed_join=§a%s's join has been allowed.\nlpp.log.disconnected=§c%s disconnected while waiting.\nlpp.command.allowlist.description=§sManages the names of players prioritized to join when general player join is disabled.\nlpp.command.allowlist.add.allowed=§a%s has been added to the allowlist.\nlpp.command.allowlist.add.exist=§e%s is already in the allowlist.\nlpp.command.allowlist.remove.removed=§a%s has been removed from the allowlist.\nlpp.command.allowlist.remove.nothing=§e%s does not exist in the allowlist.\nlpp.command.allowlist.remove_all=§aThe allowlist has been reset.\nlpp.command.allowlist.wrong=Invalid command.",
+        "Lumine Proxy Protection v11 [RP]/texts/ja_JP.lang": "lpp.log.bot_threatlock=§v広告ボットを検出しました: %s。§cプレイヤーの参加が無効になりました。§v%s秒後に自動的に有効になります。§e手動で有効にするには、チャットで /playerjoin true と入力してください。\nlpp.log.bot=§v広告ボットを検出しました: %s\nlpp.log.chat_spam=§vチャットスパムを検出しました: %s\nlpp.log.player_join_enabled=§aプレイヤーの参加が有効になりました。\nlpp.log.disallowjoin_active=§e%s が参加を試みています。許可するには、チャットで /allowlist add %s と入力してください。\nlpp.log.disallowjoin_active_warn=§c%s が参加を試みました。サーバーは現在、自動脅威ロック中です。許可するには、チャットで /allowlist add %s と入力してください。見知らぬ人を信用しないでください。\nlpp.command.playerjoin.description=§sプレイヤーの参加状態を制御します。\nlpp.command.threatlock.description=§s不審なプレイヤーが参加を試みた際、指定された時間サーバーを自動的にロックします。\nlpp.command.threatlock_duration.description=§s不審なプレイヤーが検出された後、プレイヤーの参加を無効にする時間を設定します。\nlpp.command.playerjoin.changed=§hプレイヤーの参加設定が %s に変更されました。\nlpp.command.threatlock.changed=§h自動脅威ロック機能が %s に変更されました。\nlpp.command.threatlock_duration.changed=§h自動脅威ロック時間が %s 秒に設定されました。\nlpp.common.enabled=有効\nlpp.common.disabled=無効\nlpp.log.allowed_join=§a%s の参加が許可されました。\nlpp.log.disconnected=§c%s が待機中に切断しました。\nlpp.command.allowlist.description=§sプレイヤーの参加が無効になっている場合でも、優先的に参加を許可するプレイヤー名を管理します。\nlpp.command.allowlist.add.allowed=§a%s が許可リストに追加されました。\nlpp.command.allowlist.add.exist=§e%s はすでに許可リストに存在します。\nlpp.command.allowlist.remove.removed=§a%s が許可リストから削除されました。\nlpp.command.allowlist.remove.nothing=§e%s は許可リストに存在しません。\nlpp.command.allowlist.remove_all=§a許可リストが初期化されました。\nlpp.command.allowlist.wrong=無効なコマンドです。",
+        "Lumine Proxy Protection v11 [RP]/texts/ko_KR.lang": "lpp.log.bot_threatlock=§v광고봇이 탐지되었습니다: %s. §c플레이어 접속이 비활성화되었습니다. §v%s초 후에 자동으로 활성화됩니다. §e수동으로 활성화하려면 채팅에 /playerjoin true를 입력하세요.\nlpp.log.bot=§v광고봇이 탐지되었습니다: %s\nlpp.log.chat_spam=§v채팅 스팸이 탐지되었습니다: %s\nlpp.log.player_join_enabled=§a플레이어 접속이 활성화되었습니다.\nlpp.log.disallowjoin_active=§e%s님이 접속 중입니다. 접속을 허용하려면 채팅에 /allowlist add %s를 입력하세요.\nlpp.log.disallowjoin_active_warn=§c%s님이 접속을 시도했습니다. 서버가 위협 자동 차단 중입니다. 허용하려면 채팅에 /allowlist add %s를 입력하세요. 아무나 신뢰하지 마세요.\nlpp.command.playerjoin.description=§s플레이어 접속을 제어합니다.\nlpp.command.threatlock.description=§s의심스러운 플레이어가 접속을 시도할 때 자동으로 일정 시간 동안 서버를 잠급니다.\nlpp.command.threatlock_duration.description=§s의심스러운 플레이어가 탐지된 후 플레이어 접속이 비활성화되는 시간을 설정합니다.\nlpp.command.playerjoin.changed=§h플레이어 접속이 %s 상태로 변경되었습니다.\nlpp.command.threatlock.changed=§h위협 자동 차단 기능이 %s 상태로 변경되었습니다.\nlpp.command.threatlock_duration.changed=§h위협 자동 차단 시간이 %s초로 설정되었습니다.\nlpp.common.enabled=활성화\nlpp.common.disabled=비활성화\nlpp.log.allowed_join=§a%s님의 접속이 허용되었습니다.\nlpp.log.disconnected=§c%s님이 대기 중 연결을 끊었습니다.\nlpp.command.allowlist.description=§s플레이어 접속이 비활성화되었을때 우선으로 접속을 허용할 플레이어 이름을 관리합니다.\nlpp.command.allowlist.add.allowed=§a%s님이 허용 목록에 추가되었습니다.\nlpp.command.allowlist.add.exist=§e%s님은 이미 허용 목록에 있습니다.\nlpp.command.allowlist.remove.removed=§a%s님이 허용 목록에서 제거되었습니다.\nlpp.command.allowlist.remove.nothing=§e%s님은 허용 목록에 존재하지 않습니다.\nlpp.command.allowlist.remove_all=§a허용 목록이 초기화되었습니다.\nlpp.command.allowlist.wrong=명령어가 잘못되었습니다.",
+        "Lumine Proxy Protection v11 [RP]/texts/languages.json": "[\n\t\"en_US\",\n\t\"ja_JP\",\n\t\"ko_KR\",\n\t\"zh_CN\"\n]",
+        "Lumine Proxy Protection v11 [RP]/texts/zh_CN.lang": "lpp.log.bot_threatlock=§v检测到广告机器人: %s。§c玩家加入已被禁用。§v%s秒后将自动启用。§e如需手动启用，请在聊天框中输入 /playerjoin true。\nlpp.log.bot=§v检测到广告机器人: %s\nlpp.log.chat_spam=§v检测到聊天刷屏: %s\nlpp.log.player_join_enabled=§a玩家加入已启用。\nlpp.log.disallowjoin_active=§e%s 正在尝试加入。如需允许其加入，请在聊天框中输入 /allowlist add %s。\nlpp.log.disallowjoin_active_warn=§c%s 尝试加入。服务器正处于自动威胁锁定状态。如需允许，请在聊天框中输入 /allowlist add %s。请勿轻信陌生人。\nlpp.command.playerjoin.description=§s控制玩家加入状态。\nlpp.command.threatlock.description=§s当可疑玩家尝试加入时，自动锁定服务器一段时间。\nlpp.command.threatlock_duration.description=§s设置检测到可疑玩家后禁用玩家加入的时长。\nlpp.command.playerjoin.changed=§h玩家加入状态已更改为 %s。\nlpp.command.threatlock.changed=§h自动威胁锁定功能已更改为 %s。\nlpp.command.threatlock_duration.changed=§h自动威胁锁定时间已设置为 %s 秒。\nlpp.common.enabled=启用\nlpp.common.disabled=禁用\nlpp.log.allowed_join=§a已允许 %s 加入。\nlpp.log.disconnected=§c%s 在等待时断开了连接。\nlpp.command.allowlist.description=§s管理在玩家加入被禁用时，优先允许加入的玩家名单。\nlpp.command.allowlist.add.allowed=§a%s 已添加到白名单。\nlpp.command.allowlist.add.exist=§e%s 已存在于白名单中。\nlpp.command.allowlist.remove.removed=§a%s 已从白名单中移除。\nlpp.command.allowlist.remove.nothing=§e%s 不在白名单中。\nlpp.command.allowlist.remove_all=§a白名单已重置。\nlpp.command.allowlist.wrong=命令无效。"
+      },
+      "created_at": 1779022657.2742703
+    }
+  },
+  "user_settings": {
+    "라이크": {
+      "theme": "minescript",
+      "fontSize": 14,
+      "fontFamily": "JetBrains Mono",
+      "tabSize": 2,
+      "minimap": true,
+      "wordWrap": false,
+      "lineNumbers": true,
+      "autoSave": true,
+      "autoSaveDelay": 1000,
+      "autoComplete": true,
+      "formatOnPaste": true,
+      "renderWhitespace": "selection",
+      "cursorBlinking": "smooth",
+      "cursorStyle": "line",
+      "showCollaborators": true,
+      "showEditingIndicator": true
+    },
+    "라이크 테스트": {
+      "theme": "minescript",
+      "fontSize": 14,
+      "fontFamily": "JetBrains Mono",
+      "tabSize": "2",
+      "minimap": true,
+      "wordWrap": false,
+      "lineNumbers": true,
+      "autoSave": true,
+      "autoSaveDelay": 5000,
+      "autoComplete": true,
+      "formatOnPaste": true,
+      "renderWhitespace": "selection",
+      "cursorBlinking": "smooth",
+      "cursorStyle": "line",
+      "showCollaborators": true,
+      "showEditingIndicator": true
+    },
+    "테스트2": {
+      "theme": "minescript",
+      "fontSize": 14,
+      "fontFamily": "JetBrains Mono",
+      "tabSize": 2,
+      "minimap": true,
+      "wordWrap": false,
+      "lineNumbers": true,
+      "autoSave": true,
+      "autoSaveDelay": 1000,
+      "autoComplete": true,
+      "formatOnPaste": true,
+      "renderWhitespace": "selection",
+      "cursorBlinking": "smooth",
+      "cursorStyle": "line",
+      "showCollaborators": true,
+      "showEditingIndicator": true
+    },
+    "snrnsrk9901": {
+      "theme": "minescript",
+      "fontSize": 14,
+      "fontFamily": "JetBrains Mono",
+      "tabSize": 2,
+      "minimap": true,
+      "wordWrap": false,
+      "lineNumbers": true,
+      "autoSave": true,
+      "autoSaveDelay": 1000,
+      "autoComplete": true,
+      "formatOnPaste": true,
+      "renderWhitespace": "selection",
+      "cursorBlinking": "smooth",
+      "cursorStyle": "line",
+      "showCollaborators": true,
+      "showEditingIndicator": true
+    },
+    "누군가": {
+      "theme": "minescript",
+      "fontSize": 14,
+      "fontFamily": "JetBrains Mono",
+      "tabSize": 2,
+      "minimap": true,
+      "wordWrap": false,
+      "lineNumbers": true,
+      "autoSave": true,
+      "autoSaveDelay": 1000,
+      "autoComplete": true,
+      "formatOnPaste": true,
+      "renderWhitespace": "selection",
+      "cursorBlinking": "smooth",
+      "cursorStyle": "line",
+      "showCollaborators": true,
+      "showEditingIndicator": true
+    },
+    "클로드": {
+      "theme": "minescript",
+      "fontSize": 14,
+      "fontFamily": "JetBrains Mono",
+      "tabSize": 2,
+      "minimap": true,
+      "wordWrap": false,
+      "lineNumbers": true,
+      "autoSave": true,
+      "autoSaveDelay": 1000,
+      "autoComplete": true,
+      "formatOnPaste": true,
+      "renderWhitespace": "selection",
+      "cursorBlinking": "smooth",
+      "cursorStyle": "line",
+      "showCollaborators": true,
+      "showEditingIndicator": true
+    }
+  },
+  "bridge_status": {}
+}
